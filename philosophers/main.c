@@ -2,7 +2,7 @@
 
 int i = 2;
 
-void *test(void *parameter)
+void *test(void *p)
 {
     printf("Value is %i\n", *(int *)p);
 
@@ -13,6 +13,7 @@ int main(void)
 {
     pthread_t id;
     int j;
+    int *ptr;
 
     j = 1;
     pthread_create(&id, NULL, test, &j);
