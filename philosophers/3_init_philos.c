@@ -32,13 +32,11 @@ static int create_philo(t_philo **philos, t_data data, int i)
     
 }
 
-void init_philos(t_philo ***philosophers, t_data data)
+void init_philos(t_philo ***philos, t_data data)
 {
-    t_philo **philos;
     int i;
 
-    philos = *philosophers;
-    philos = malloc(data.philo_nr * sizeof(t_philo *));
+    *philos = malloc(data.philo_nr * sizeof(t_philo *));
     //error note
     if (!philos)
         exit(1);
