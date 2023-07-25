@@ -12,7 +12,7 @@ void free_philos(t_philo **philos, int i)
         j++;
     }
     free(philos);
-    //make sure this is good
+    //error note
     exit(EXIT_FAILURE);
 }
 
@@ -38,7 +38,7 @@ void init_philos(t_philo **philosophers, t_data data)
 
     philos = philosophers;
     philos = malloc(data.philo_nr * sizeof(t_philo *));
-    //check how to handle errors in the end
+    //error note
     if (!philos)
         exit(1);
     i = 0;

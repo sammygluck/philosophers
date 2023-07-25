@@ -1,5 +1,18 @@
 #include "philosophers.h"
 
+void print_philos(t_philo **philosophers, int count)
+{
+    int i;
+
+    i = 0;
+    while (i < count)
+    {
+        //note
+        printf("%i\n", philosophers[i]->id);
+        i++;
+    }
+}
+
 int main(int argc, char **argv)
 {
     t_data data;
@@ -7,6 +20,7 @@ int main(int argc, char **argv)
 
     init_data(&data);
     init_philos(philosophers, data);
+    print_philos(philosophers, data.philo_nr);
 }
 
 // //original testing code
