@@ -38,13 +38,13 @@ void init_philos(t_philo ***philos, t_data data)
 
     *philos = malloc(data.philo_nr * sizeof(t_philo *));
     //error note
-    if (!philos)
+    if (!*philos)
         exit(1);
     i = 0;
     while (i < data.philo_nr)
     {
-        if (!create_philo(philos, data, i))
-            free_philos(philos, i);
+        if (!create_philo(*philos, data, i))
+            free_philos(*philos, i);
         i++;
     }
 
