@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-void free_philos(t_philo **philos, int i)
+static void free_philos(t_philo **philos, int i)
 {
     int j;
 
@@ -16,7 +16,7 @@ void free_philos(t_philo **philos, int i)
     exit(EXIT_FAILURE);
 }
 
-int create_philo(t_philo **philos, t_data data, int i)
+static int create_philo(t_philo **philos, t_data data, int i)
 {
     t_philo *philo;
 

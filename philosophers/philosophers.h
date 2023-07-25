@@ -26,6 +26,7 @@ void init_data(t_data *data, int argc, char **argv);
 int	ft_atoi(const char *str);
 int ft_is_digit(int c);
 int is_str_all_digit(char *str);
+void init_philos(t_philo **philosophers, t_data data);
 
 
 #endif

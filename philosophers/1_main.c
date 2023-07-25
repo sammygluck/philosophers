@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     t_data data;
     t_philo **philosophers;
 
-    init_data(&data);
+    init_data(&data, argc, argv);
     init_philos(philosophers, data);
     print_philos(philosophers, data.philo_nr);
 }
