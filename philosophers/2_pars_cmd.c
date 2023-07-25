@@ -22,12 +22,13 @@ static void set_data(t_data *data, int argc, char **argv)
     if (argc == 6)
         data->max_eats = ft_atoi(argv[5]);
     else
-        data->max_eats = 0;
+        data->max_eats = -1;
 }
 
 void init_data(t_data *data, int argc, char **argv)
 {
+    //error note
     if (!validate_cmd(argc, argv))
-        printf("error");
+        exit(EXIT_FAILURE);
     set_data(data, argc, argv);
 }
