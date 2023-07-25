@@ -17,6 +17,7 @@ typedef struct data {
 typedef struct s_philo {
     int id;
     int eat_count;
+    int max_eats;
     //thread id
     //forks
 } t_philo;
