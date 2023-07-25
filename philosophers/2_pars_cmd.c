@@ -10,6 +10,7 @@ static int validate_cmd(int argc, char **argv)
     while (i < argc)
         if (!is_str_all_digit(argv[i++]))
             return (0);
+    return (1);
 }
 
 static void set_data(t_data *data, int argc, char **argv)
