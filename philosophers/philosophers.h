@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 #include <pthread.h>
 
 typedef struct data {
@@ -22,5 +23,9 @@ typedef struct s_philo {
 
 
 void init_data(t_data *data, int argc, char **argv);
+int	ft_atoi(const char *str);
+int ft_is_digit(int c);
+int is_str_all_digit(char *str);
+
 
 #endif
