@@ -1,13 +1,13 @@
 #include "philosophers.h"
 
-static void *thread_function(void *mutex)
+static void *thread_function(void *mutex_arg)
 {
     int i;
 
     i = 0;
     while (i < 10)
     {
-        pthread_mutex_t *mutex = (pthread_mutex_t *) mutex;
+        pthread_mutex_t *mutex = (pthread_mutex_t *) mutex_arg;
         pthread_mutex_lock(mutex);
         printf("hello world: %i\n", i);
         pthread_mutex_unlock(mutex);
@@ -18,9 +18,9 @@ static void *thread_function(void *mutex)
     return (NULL);
 }
 
-static void *second_function(void *mutex)
+static void *second_function(void *mutex_arg)
 {
-    pthread_mutex_t *mutex = (pthread_mutex_t *) mutex;
+    pthread_mutex_t *mutex = (pthread_mutex_t *) mutex_arg;
     while (1)
     {
         pthread_mutex_lock(mutex);
