@@ -6,6 +6,7 @@
 #include <string.h>
 #include <limits.h>
 #include <pthread.h>
+#include <unistd.h>
 
 typedef struct data {
     int philo_nr;
