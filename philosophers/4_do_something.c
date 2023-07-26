@@ -10,8 +10,9 @@ static void *thread_function(void *mutex_arg)
         pthread_mutex_t *mutex = (pthread_mutex_t *) mutex_arg;
         pthread_mutex_lock(mutex);
         printf("hello world: %i\n", i);
-        pthread_mutex_unlock(mutex);
         i++;
+        pthread_mutex_unlock(mutex);
+       
     }
    
 
