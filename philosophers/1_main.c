@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     init_data(&data, argc, argv);
     init_philos(&philosophers, data);
     print_philos(philosophers, data.philo_nr);
+    dual_thread();
 }
 
 // //original testing code

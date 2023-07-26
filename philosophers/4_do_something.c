@@ -10,7 +10,7 @@ static void *second_function(void *arg)
     printf("world\n");
 }
 
-void dual_thread(t_philo *philo)
+void dual_thread(void)
 {
     //one thread that will block a resource for a few seconds
     pthread_t id_one;
