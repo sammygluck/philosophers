@@ -12,7 +12,7 @@ static void *thread_function(void *mutex_arg)
         printf("hello world: %i\n", i);
         i++;
         pthread_mutex_unlock(mutex);
-        sleep(3);
+        sleep(2);
        
     }
    
