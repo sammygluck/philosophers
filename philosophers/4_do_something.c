@@ -1,12 +1,12 @@
 #include "philosophers.h"
 
-static void *thread_function(void)
+static void *thread_function(void *unused)
 {
     printf("hello\n");
     return (NULL);
 }
 
-static void *second_function(void)
+static void *second_function(void *unused)
 {
     printf("world\n");
     return (NULL);
