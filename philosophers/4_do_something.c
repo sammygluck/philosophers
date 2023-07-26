@@ -1,11 +1,11 @@
 #include "philosophers.h"
 
-static void *thread_function(void *arg)
+static void *thread_function(void)
 {
     printf("hello\n");
 }
 
-static void *second_function(void *arg)
+static void *second_function(void)
 {
     printf("world\n");
 }
@@ -16,8 +16,8 @@ void dual_thread(void)
     pthread_t id_one;
     pthread_t id_two;
     //pthread_mutex_t mutex_one;
-    pthread_create(&id_one, NULL, thread_function, NULL);
-    pthread_create(&id_two, NULL, second_function, NULL);
+    pthread_create(id_one, NULL, thread_function, NULL);
+    pthread_create(id_two, NULL, second_function, NULL);
     pthread_join(&id_one, NULL);
     pthread_join(&id_two, NULL);
     //another thread of something trying to reach that resource
