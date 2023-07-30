@@ -17,6 +17,7 @@ typedef struct data {
 } t_data;
 typedef struct s_philo {
     int id;
+    pthread_t tid;
     int eat_count;
     int max_eats;
     //thread id
@@ -29,7 +30,8 @@ int	ft_atoi(const char *str);
 int ft_is_digit(int c);
 int is_str_all_digit(char *str);
 void init_philos(t_philo ***philos, t_data data);
-void dual_thread(void);
+run_philos(t_philo ***philosophers, t_data *data);
+
 
 
 #endif
