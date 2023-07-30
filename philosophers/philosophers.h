@@ -20,6 +20,7 @@ typedef struct s_philo {
     pthread_t tid;
     int eat_count;
     int max_eats;
+    t_data *data;
     //thread id
     //forks
 } t_philo;
