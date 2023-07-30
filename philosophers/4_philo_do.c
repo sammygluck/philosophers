@@ -9,6 +9,7 @@ void *print_id(void *arg)
     id = philo->id;
     //note
     printf("this is my id %i", id);
+    return (NULL);
 }
 
 void run_philos(t_philo ***philosophers, t_data *data)
