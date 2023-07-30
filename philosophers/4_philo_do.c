@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-void print_id(void *arg)
+void *print_id(void *arg)
 {
     int id;
     t_philo *philo;
