@@ -8,7 +8,7 @@ void *print_id(void *arg)
     philo = (t_philo *) arg;
     id = philo->id;
     //note
-    printf("this is my id %i", id);
+    printf("this is my id %i\n", id);
     return (NULL);
 }
 
