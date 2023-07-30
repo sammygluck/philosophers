@@ -24,7 +24,7 @@ static int create_philo(t_philo **philos, t_data data, int i)
     if (!philo)
         return (0);
     //these are just the a few of more
-    philo->id = i;
+    philo->id = i + 1;
     philo->eat_count = 0;
     philo->max_eats = data.max_eats;
     philos[i] = philo;
