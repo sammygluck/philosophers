@@ -21,7 +21,7 @@ void run_philos(t_philo ***philosophers, t_data *data)
     while (i < data->philo_nr)
     {
         //create thread for each philo
-        pthread_create(&philos[i].tid, NULL, print_id, philos[i]);
+        pthread_create(&philos[i]->tid, NULL, print_id, philos[i]);
         i++;
     }
 }
