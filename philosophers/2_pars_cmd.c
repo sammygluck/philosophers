@@ -24,7 +24,11 @@ static void set_data(t_data *data, int argc, char **argv)
     else
         data->max_eats = -1;
     //error note + location note
-    //pthread_mutex_init(data->log_mutex, NULL);
+    data->log_mutex = malloc(sizeof(pthread_mutex_t));  // Allocate memory
+    if (!data->log_mutex)
+        // Handle allocation error
+        exit(EXIT_FAILURE);
+    pthread_mutex_init(data->log_mutex, NULL);
 }
 
 void init_data(t_data *data, int argc, char **argv)
