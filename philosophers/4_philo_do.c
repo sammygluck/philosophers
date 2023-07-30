@@ -7,10 +7,10 @@ void *print_id(void *arg)
 
     philo = (t_philo *) arg;
     id = philo->id;
-    pthread_mutex_lock(philo->data.log_mutex);
+    pthread_mutex_lock(philo->data->log_mutex);
     //note
     printf("this is my id %i\n", id);
-    pthread_mutex_unlock(philo->data.log_mutex);
+    pthread_mutex_unlock(philo->data->log_mutex);
     return (NULL);
 }
 
