@@ -23,6 +23,8 @@ static void set_data(t_data *data, int argc, char **argv)
         data->max_eats = ft_atoi(argv[5]);
     else
         data->max_eats = -1;
+    //error note + location note
+    pthread_mutex_init(&data->log_mutex, NULL);
 }
 
 void init_data(t_data *data, int argc, char **argv)
