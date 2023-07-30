@@ -23,7 +23,7 @@ void run_philos(t_philo ***philosophers, t_data *data)
     {
         //create thread for each philo
         pthread_create(&philos[i]->tid, NULL, print_id, philos[i]);
-        sleep(2);
+        
         i++;
     }
 }
