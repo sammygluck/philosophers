@@ -11,7 +11,7 @@ void print_id(void *arg)
     printf("this is my id %i", id);
 }
 
-run_philos(t_philo ***philosophers, t_data *data)
+void run_philos(t_philo ***philosophers, t_data *data)
 {
     t_philo **philos;
     int i;
