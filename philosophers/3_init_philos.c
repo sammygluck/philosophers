@@ -44,7 +44,7 @@ void init_philos(t_philo ***philos, t_data *data)
     i = 0;
     while (i < data->philo_nr)
     {
-        if (!create_philo(*philos, &data, i))
+        if (!create_philo(*philos, data, i))
             free_philos(*philos, i);
         i++;
     }
