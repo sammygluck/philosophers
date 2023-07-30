@@ -31,7 +31,7 @@ void run_philos(t_philo ***philosophers, t_data *data)
     i = 0;
     while (i < data->philo_nr)
     {
-        pthread_join(&philos[i]->tid, NULL);
+        pthread_join(philos[i]->tid, NULL);
         i++;
     }
 }
