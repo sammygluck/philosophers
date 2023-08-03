@@ -1,5 +1,6 @@
 #include "philosophers.h"
 
+//tmp
 void print_philos(t_philo **philosophers, int count)
 {
     int i;

@@ -29,6 +29,7 @@ static int create_philo(t_philo **philos, t_data *data, int i)
     philo->max_eats = data->max_eats;
     philo->data = data;
     philos[i] = philo;
+    set_philo
     return (1);
     
 }
@@ -41,6 +42,8 @@ void init_philos(t_philo ***philos, t_data *data)
     //error note
     if (!*philos)
         exit(1);
+    //error note
+    init_mutexes(data);
     i = 0;
     while (i < data->philo_nr)
     {

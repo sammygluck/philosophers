@@ -1,24 +1,13 @@
 #include "philosophers.h"
 
-void *test_function(void *arg)
+void log_action(t_philo *philo, char *str)
 {
-    int id;
-    t_philo *philo;
+    pthread_mutex_t mutex;
 
-    philo = (t_philo *) arg;
-    id = philo->id;
-    pthread_mutex_lock(philo->data->log_mutex);
-    //note
-    printf("this is my id %i\n", id);
-    pthread_mutex_unlock(philo->data->log_mutex);
-    return (NULL);
-}
-
-void print_action(pthread_mutex_t *mutex, char *str)
-{
+    mutex = philo->data->log_mutex;
     pthread_mutex_lock(mutex);
     //note
-    printf("%s\n", str);
+    printf("%llu %i %s\n", time_now(), philo->id, str);
     pthread_mutex_unlock(mutex);
 }
 
@@ -28,13 +17,9 @@ void *think_eat_sleep(void *arg)
     
     philo = (t_philo *) arg;
     //A. As long as all alive && the max eating times hasn't been reached
-    //1. Think
-    //  a. print thinking unto the screen
-    print_action(philo->data->log_mutex, "THINK");
-    //2. Eat
-    print_action(philo->data->log_mutex, "EAT");
-    //3. Sleep
-    print_action(philo->data->log_mutex, "SLEEP");
+    philo_think(philo);
+    philo_eat(philo);
+    philo_sleep(philo);
     return (NULL);
 }
 
@@ -58,3 +43,21 @@ void run_philos(t_philo ***philosophers, t_data *data)
         i++;
     }
 }
+
+
+
+
+---------------------------------------------------------
+// void *test_function(void *arg)
+// {
+//     int id;
+//     t_philo *philo;
+
+//     philo = (t_philo *) arg;
+//     id = philo->id;
+//     pthread_mutex_lock(philo->data->log_mutex);
+//     //note
+//     printf("this is my id %i\n", id);
+//     pthread_mutex_unlock(philo->data->log_mutex);
+//     return (NULL);
+// }
