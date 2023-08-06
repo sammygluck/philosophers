@@ -17,7 +17,7 @@ typedef struct data {
     int time_to_sleep;
     int max_eats;
     pthread_mutex_t *log_mutex; //still needs to be initialized
-    pthread_mutex_t **fork_mutexes;
+    pthread_mutex_t *fork_mutexes;
 } t_data;
 typedef struct s_philo {
     int id;
