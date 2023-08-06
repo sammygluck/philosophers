@@ -4,7 +4,7 @@ void log_action(t_philo *philo, char *str)
 {
     pthread_mutex_t *mutex;
 
-    mutex = &(philo->data->log_mutex);
+    mutex = philo->data->log_mutex;
     pthread_mutex_lock(mutex);
     //note
     printf("%llu %i %s\n", time_now(), philo->id, str);
