@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-long long time_now()
+long long time_now(void)
 {
     t_timeval now;
     long long now_ms;
