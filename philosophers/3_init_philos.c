@@ -38,9 +38,9 @@ void init_philos(t_philo ***philos, t_data *data)
 {
     int i;
 
-    **philos = malloc(data->philo_nr * sizeof(t_philo *));
+    *philos = malloc(data->philo_nr * sizeof(t_philo *));
     //error note
-    if (!**philos)
+    if (!*philos)
         exit(1);
     //error note
     init_mutexes(data);
