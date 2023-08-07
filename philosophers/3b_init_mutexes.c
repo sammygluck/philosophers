@@ -30,9 +30,9 @@ void set_philo_mutex(t_philo ***philosophers, t_data *data)
     i = 0;
     while (i < data->philo_nr)
     {
-        philos[i]->left_fork = &(data->fork_mutexes[i]);
+        philos[i]->left_fork = data->fork_mutexes[i];
         //error check if !
-        philos[i]->right_fork = &(data->fork_mutexes[(i + 1) % data->philo_nr]);
+        philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
         i++;
     }
 }
