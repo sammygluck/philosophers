@@ -15,7 +15,7 @@ void init_mutexes(t_data *data)
         //error-note
         //if (!data->fork_mutexes[i])
         //error-note
-        pthread_mutex_init(&data->fork_mutexes[i], NULL);
+        pthread_mutex_init(data->fork_mutexes[i], NULL);
         i++;
     }
 }
