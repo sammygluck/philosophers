@@ -29,7 +29,6 @@ static int create_philo(t_philo ***philos, t_data *data, int i)
     philo->max_eats = data->max_eats;
     philo->data = data;
     (*philos)[i] = philo;
-    set_philo_mutex(philos, data);
     return (1);
     
 }
@@ -51,4 +50,5 @@ void init_philos(t_philo ***philos, t_data *data)
             free_philos(*philos, i); 
         i++;
     }
+    set_philo_mutex(philos, data);
 }
