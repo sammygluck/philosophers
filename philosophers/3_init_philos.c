@@ -26,7 +26,9 @@ static int create_philo(t_philo ***philos, t_data *data, int i)
     //these are just the a few of more
     philo->id = i + 1;
     philo->eat_count = 0;
-    philo->max_eats = data->max_eats;
+    philo->start_routine = 0;
+    philo->last_eat = 0;
+    //philo->max_eats = data->max_eats;
     philo->data = data;
     (*philos)[i] = philo;
     return (1);

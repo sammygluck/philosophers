@@ -16,6 +16,7 @@ void *think_eat_sleep(void *arg)
     t_philo *philo;
     
     philo = (t_philo *) arg;
+    philo->start_routine = time_now(void);
     //A. As long as all alive && the max eating times hasn't been reached
     philo_think(philo);
     philo_eat(philo);

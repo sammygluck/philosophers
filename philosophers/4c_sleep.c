@@ -1,12 +1,12 @@
 #include "philosophers.h"
 
-long long time_now(void)
+time time_now(void)
 {
     t_timeval now;
-    long long now_ms;
+    time now_ms;
 
     gettimeofday(&now, NULL);
-    now_ms = ((long long)now.tv_sec *1000) + (now.tv_usec / 1000);
+    now_ms = ((time)now.tv_sec *1000) + (now.tv_usec / 1000);
     return (now_ms);
 }
 

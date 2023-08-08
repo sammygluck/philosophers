@@ -35,5 +35,6 @@ void philo_eat(t_philo *philo)
     log_action(philo, "is eating");
     usleep(philo->data->time_to_eat * 1000);
     put_forks_down(philo);
-    //update times eaten
+    philo->last_eat = time_now(void);
+    philo->eat_count += 1;
 }

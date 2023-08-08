@@ -28,6 +28,7 @@ static void set_data(t_data *data, int argc, char **argv)
     if (!data->log_mutex)
         // Handle allocation error
         exit(EXIT_FAILURE);
+    data->all_alive = 1;
     pthread_mutex_init(data->log_mutex, NULL);
 }
 
