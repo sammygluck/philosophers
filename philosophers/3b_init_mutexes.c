@@ -30,6 +30,7 @@ void	init_mutexes(t_data *data)
 		pthread_mutex_init(data->fork_mutexes[i], NULL);
 		i++;
 	}
+	
 }
 
 void	set_philo_mutex(t_philo ***philosophers, t_data *data)

@@ -19,7 +19,9 @@ typedef struct data {
     int all_alive;
     pthread_mutex_t *log_mutex; //still needs to be initialized
     pthread_mutex_t **fork_mutexes;
+    pthread_mutex_t *alive_mutex;
 } t_data;
+
 typedef struct s_philo {
     int id;
     pthread_t tid;
@@ -49,6 +51,8 @@ void put_forks_down(t_philo *philo);
 void pick_up_forks(t_philo *philo);
 void philo_sleep(t_philo *philo);
 long long time_now(void);
+void	*monitor(void *philosophers);
+int	check_each_philo(t_philo **philos);
 
 
 #endif

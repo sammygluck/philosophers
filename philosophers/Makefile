@@ -1,6 +1,6 @@
 NAME = philosophers
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g 
+CFLAGS =  -Wextra -Wall -g 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 HEADERS = $(wildcard *.h)

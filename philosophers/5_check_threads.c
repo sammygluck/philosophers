@@ -38,16 +38,19 @@ int	check_each_philo(t_philo **philos)
 	return (1);
 }
 
-void	*monitor(void ***philosophers)
+void	*monitor(void *philosophers)
 {
 	t_philo	**philos;
 
-	philos = (t_philo **)*philosophers;
+	philos = *(t_philo ***)philosophers;
+
 	while (1)
 	{
-		usleep(100000);
+        philos[0]->data->all_alive = 0;        
 		if (!check_each_philo(philos))
 			break ;
 	}
+    //shut down operation
+    philos[0]->data->all_alive = 0;
 	return (NULL);
 }
