@@ -10,7 +10,6 @@
 #include <sys/time.h>
 
 typedef struct timeval t_timeval;
-typedef long long time;
 typedef struct data {
     int philo_nr;
     int time_to_die;
@@ -28,8 +27,8 @@ typedef struct s_philo {
     t_data *data;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
-    time start_routine;
-    time last_eat;
+    long long start_routine;
+    long long last_eat;
     
 } t_philo;
 
@@ -49,7 +48,7 @@ void philo_eat(t_philo *philo);
 void put_forks_down(t_philo *philo);
 void pick_up_forks(t_philo *philo);
 void philo_sleep(t_philo *philo);
-time time_now(void);
+long long time_now(void);
 
 
 #endif

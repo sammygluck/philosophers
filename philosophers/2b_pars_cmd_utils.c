@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   2b_pars_cmd_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/10 12:09:12 by sgluck            #+#    #+#             */
+/*   Updated: 2023/08/10 12:11:21 by sgluck           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-int ft_is_digit(int c)
+int	ft_is_digit(int c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (c >= '0' && c <= '9')
-        i = 1;
-    return (i);
+	i = 0;
+	if (c >= '0' && c <= '9')
+		i = 1;
+	return (i);
 }
 
-int is_str_all_digit(char *str)
+int	is_str_all_digit(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!str || !str[i])
-        return (0);
-    while (str[i])
-    {
-        if (!ft_is_digit(str[i]))
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	if (!str || !str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!ft_is_digit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	ft_atoi(const char *str)

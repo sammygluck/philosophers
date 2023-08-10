@@ -1,53 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   4_philo_actions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/10 12:20:24 by sgluck            #+#    #+#             */
+/*   Updated: 2023/08/10 12:23:11 by sgluck           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
-void log_action(t_philo *philo, char *str)
+void	log_action(t_philo *philo, char *str)
 {
-    pthread_mutex_t *mutex;
+	pthread_mutex_t	*mutex;
 
-    mutex = philo->data->log_mutex;
-    pthread_mutex_lock(mutex);
-    //note
-    printf("%llu %i %s\n", time_now(), philo->id, str);
-    pthread_mutex_unlock(mutex);
+	mutex = philo->data->log_mutex;
+	pthread_mutex_lock(mutex);
+	//note
+	printf("%llu %i %s\n", time_now(), philo->id, str);
+	pthread_mutex_unlock(mutex);
 }
 
-void *think_eat_sleep(void *arg)
-{  
-    t_philo *philo;
-    
-    philo = (t_philo *) arg;
-    philo->start_routine = time_now(void);
-    //A. As long as all alive && the max eating times hasn't been reached
-    philo_think(philo);
-    philo_eat(philo);
-    philo_sleep(philo);
-    return (NULL);
-}
-
-void run_philos(t_philo ***philosophers, t_data *data)
+void	*think_eat_sleep(void *arg)
 {
-    t_philo **philos;
-    int i;
+	t_philo	*philo;
 
-    i = 0;
-    philos = *philosophers;
-    while (i < data->philo_nr)
-    {
-        //create thread for each philo
-        pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]); 
-        i++;
-    }
-    i = 0;
-    while (i < data->philo_nr)
-    {
-        pthread_join(philos[i]->tid, NULL);
-        i++;
-    }
+	philo = (t_philo *) arg;
+	philo->start_routine = time_now();
+	//A. As long as all alive && the max eating times hasn't been reached
+	philo_think(philo);
+	philo_eat(philo);
+	philo_sleep(philo);
+	return (NULL);
 }
 
+void	run_philos(t_philo ***philosophers, t_data *data)
+{
+	t_philo	**philos;
+	int		i;
 
-
-
+	i = 0;
+	philos = *philosophers;
+	while (i < data->philo_nr)
+	{
+		//create thread for each philo
+		pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]);
+	i++;
+	}
+	i = 0;
+	while (i < data->philo_nr)
+	{
+		pthread_join(philos[i]->tid, NULL);
+	i++;
+	}
+}
 
 // void *test_function(void *arg)
 // {
