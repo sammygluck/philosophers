@@ -1,0 +1,15 @@
+TODO:
+	1. general:
+		death of a philospher
+		mutexes for shared variables
+		fairness (even/uneven) 
+		deadlock avoid
+		cleanup when finished
+		error stuff
+		the optional parameter
+	2. corner cases:
+		1. 1 philosopher
+	3. time of death < time_to_eat ||  time_to_sleep = always dead very quickly
+	
+	
+	
