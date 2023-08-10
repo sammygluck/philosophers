@@ -1,15 +1,47 @@
 TODO:
 	1. general:
-		death of a philospher
-		mutexes for shared variables
-		fairness (even/uneven) 
-		deadlock avoid
-		cleanup when finished
-		error stuff
-		the optional parameter
+		a. death of a philospher
+		b. mutexes for shared variables
+		c. fairness (even/uneven) 
+		d. deadlock avoid
+		e. cleanup when finished
+		f. error stuff
+		g. the optional parameter
 	2. corner cases:
 		1. 1 philosopher
 	3. time of death < time_to_eat ||  time_to_sleep = always dead very quickly
+
+
+	=================
+
+	1.a: Death of a philosopher:
+	So, what are the options: option a: the philosopher himself anounces his death. This option I don't like because if 
+	the philo is stuck it can't move on. So it must be in an external thread. Either a thread inherent to the philo himself, or 
+	a general thread. I think we have to go with the second. It also means that the second the philo is dead, it can't be 
+	eating anymore afterwards. So before we eat, sleep, etc. we need to check if the guy is dead.
+
+	1.b: Shared variable mutexes:
+	The question here is if a mutex is necessary for variables which are only written by one and read by others. Since mutation
+	by others isn't possible, do we need a mutex?
+	Another question: what are the shared mutexes in this case? A few suggestions: all_alive, 
+
+	1.c: Fairness:
+	Fairness, we've decided we're going to do by dividing the group into two groups, namely the even group and the uneven group.
+	Each group is going to start to eat at different times. My hesitations: how long to wait. It can't be absolute, since eating
+	time is also dynamic. So, it must be relative to perhaps eating time. Also, will the fact that the last philospher picks up
+	his fork differently affect this process?
+
+	1.d: Deadlock avoid:
+	I want to use the last philo picks up different approach. Is this the best?
+
+	1.e: Cleanup when finished:
+	What to keep in mind: making sure all malloced stuff is freed properly. Also making sure that all threads end nicely etc.
+
+	1.f: Error stuff:
+	Make sure to exit upon error where appropriate. Make sure to free upon error. Make sure to catch all errors.
+
+	1.g: The optional parameter:
+	
 	
 	
 	
