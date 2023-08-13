@@ -46,7 +46,11 @@ void	*monitor(void *philosophers)
 
 	while (1)
 	{
-        philos[0]->data->all_alive = 0;        
+        //checking each philo includes:
+		// 		1. did all of them eat enough
+		// 		2. did anyone die
+		// if one of these conditions is yes, then we must stop our simulation
+		// i.e. set the flag to 0 and exit everything gracefully     
 		if (!check_each_philo(philos))
 			break ;
 	}

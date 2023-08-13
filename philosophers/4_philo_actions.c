@@ -14,7 +14,7 @@
 
 void	log_action(t_philo *philo, char *str)
 {
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
 
 	mutex = philo->data->log_mutex;
 	pthread_mutex_lock(mutex);
@@ -29,10 +29,12 @@ void	*think_eat_sleep(void *arg)
     int i;
 
 	philo = (t_philo *) arg;
-	philo->start_routine = time_now();
-
+	//add the even/uneven division (if even pick move otherwise sleep)
+	//create a variable holding the all_alive data and initially read by using a mutex
+	
 	//A. As long as all alive && the max eating times hasn't been reached
     i = 0;
+	
     while (philo->data->all_alive)
    { 
         philo_think(philo);

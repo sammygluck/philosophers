@@ -1,7 +1,7 @@
 TODO:
 	1. general:
 		a. death of a philospher
-		b. mutexes for shared variables
+		b. mutexes for shared variables 
 		c. fairness (even/uneven) 
 		d. deadlock avoid
 		e. cleanup when finished
@@ -23,7 +23,7 @@ TODO:
 	1.b: Shared variable mutexes:
 	The question here is if a mutex is necessary for variables which are only written by one and read by others. Since mutation
 	by others isn't possible, do we need a mutex?
-	Another question: what are the shared mutexes in this case? A few suggestions: all_alive, 
+	Another question: what are the shared mutexes in this case? A few suggestions: all_alive, last_meal, eat_count
 
 	1.c: Fairness:
 	Fairness, we've decided we're going to do by dividing the group into two groups, namely the even group and the uneven group.
@@ -41,7 +41,7 @@ TODO:
 	Make sure to exit upon error where appropriate. Make sure to free upon error. Make sure to catch all errors.
 
 	1.g: The optional parameter:
-	
+	if it's activated, we have to increase the times the philo eats after he eats
 	
 	
 	

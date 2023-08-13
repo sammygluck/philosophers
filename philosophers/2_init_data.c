@@ -35,13 +35,11 @@ static void	set_data(t_data *data, int argc, char **argv)
 		data->max_eats = ft_atoi(argv[5]);
 	else
 		data->max_eats = -1;
-	//error note + location note
-	data->log_mutex = malloc(sizeof(pthread_mutex_t));  // Allocate memory
-	if (!data->log_mutex)
-		// Handle allocation error
-		exit(EXIT_FAILURE);
 	data->all_alive = 1;
-	pthread_mutex_init(data->log_mutex, NULL);
+	data->start_routine = time_now();
+	//error notes return 0 upon failure to be handled in parent
+	pthread_mutex_init(&data->log_mutex, NULL);
+	pthread_mutex_init(&data->all_alive, NULL);
 }
 
 void	init_data(t_data *data, int argc, char **argv)

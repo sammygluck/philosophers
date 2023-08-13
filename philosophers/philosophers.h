@@ -17,9 +17,10 @@ typedef struct data {
     int time_to_sleep;
     int max_eats;
     int all_alive;
-    pthread_mutex_t *log_mutex; //still needs to be initialized
+    long long start_routine;
+    pthread_mutex_t log_mutex; 
     pthread_mutex_t **fork_mutexes;
-    pthread_mutex_t *alive_mutex;
+    pthread_mutex_t alive_mutex;
 } t_data;
 
 typedef struct s_philo {
@@ -29,8 +30,9 @@ typedef struct s_philo {
     t_data *data;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
-    long long start_routine;
     long long last_eat;
+    pthread_mutex_t last_meal_mtx;
+    pthread_mutex_t eat_count_mtx;
     
 } t_philo;
 
@@ -49,6 +51,7 @@ void philo_think(t_philo *philo);
 void philo_eat(t_philo *philo);
 void put_forks_down(t_philo *philo);
 void pick_up_forks(t_philo *philo);
+void lonely_philo(t_philo *philo);
 void philo_sleep(t_philo *philo);
 long long time_now(void);
 void	*monitor(void *philosophers);

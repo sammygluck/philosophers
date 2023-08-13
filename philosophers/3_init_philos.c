@@ -28,6 +28,43 @@ static void	free_philos(t_philo **philos, int i)
 	exit(EXIT_FAILURE);
 }
 
+void	init_mutexes(t_data *data)
+{
+	int	i;
+
+	data->fork_mutexes = malloc(sizeof(pthread_mutex_t *) * data->philo_nr);
+	//error-note
+	if (!data->fork_mutexes)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (i < data->philo_nr)
+	{
+		//error-note
+		data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
+		//error-note
+		pthread_mutex_init(data->fork_mutexes[i], NULL);
+		i++;
+	}
+	
+}
+
+void	set_philo_mutex(t_philo ***philosophers, t_data *data)
+{
+	t_philo	**philos;
+	int		i;
+
+	philos = *philosophers;
+	i = 0;
+	while (i < data->philo_nr)
+	{
+		philos[i]->left_fork = data->fork_mutexes[i];
+		//error check if !
+		philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
+		i++;
+	}
+}
+
+
 static int	create_philo(t_philo ***philos, t_data *data, int i)
 {
 	t_philo	*philo;
@@ -35,13 +72,15 @@ static int	create_philo(t_philo ***philos, t_data *data, int i)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return (0);
-	//these are just the a few of more
 	philo->id = i + 1;
 	philo->eat_count = 0;
 	philo->start_routine = 0;
 	philo->last_eat = 0;
-	//philo->max_eats = data->max_eats;
 	philo->data = data;
+	//error note
+	pthread_mutex_init(&philo->last_meal_mtx, NULL);
+	//error note
+	pthread_mutex_init(&philo->eat_count_mtx, NULL);
 	(*philos)[i] = philo;
 	return (1);
 }
