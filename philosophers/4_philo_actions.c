@@ -27,14 +27,16 @@ void	*think_eat_sleep(void *arg)
 {
 	t_philo	*philo;
     int i;
+	int all_alive;
 
 	philo = (t_philo *) arg;
-	//add the even/uneven division (if even pick move otherwise sleep)
-	//create a variable holding the all_alive data and initially read by using a mutex
-	
-	//A. As long as all alive && the max eating times hasn't been reached
+	if (philo->id % 2 == 0)
+		usleep((philo->data->time_to_eat / 2) * 1000);
+	pthread_mutex_lock(&philo->data->alive_mutex);
+	all_alive = philo->data->all_alive;
+	phtread_mutex_unlock(&philo->data->alive_mutex);
     i = 0;
-	
+	//A. As long as all alive && the max eating times hasn't been reached
     while (philo->data->all_alive)
    { 
         philo_think(philo);
@@ -55,7 +57,6 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 	philos = *philosophers;
 	while (i < data->philo_nr)
 	{
-		//create thread for each philo
 		pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]);
 		i++;
 	}

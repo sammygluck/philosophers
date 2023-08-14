@@ -56,6 +56,7 @@ void philo_sleep(t_philo *philo);
 long long time_now(void);
 void	*monitor(void *philosophers);
 int	check_each_philo(t_philo **philos);
+int all_eaten(t_philo **philos);
 
 
 #endif

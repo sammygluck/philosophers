@@ -12,6 +12,24 @@
 
 #include "philosophers.h"
 
+int all_eaten(t_philo **philos)
+{
+	int i;
+	int eat_count;
+
+	i = 0;
+	while (i < philos[0]->data->philo_nr)
+	{
+		pthread_mutex_lock(&philos[i]->eat_count_mtx);
+		eat_count = philos[i]->eat_count;
+		pthread_mutex_unlock(&philos[i]->eat_count_mtx);
+		if (eat_count < philos[i]->data->max_eats)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_each_philo(t_philo **philos)
 {
 	int			i;
@@ -21,6 +39,7 @@ int	check_each_philo(t_philo **philos)
 	i = 0;
 	while (i < philos[0]->data->philo_nr)
 	{
+		//the problem with this is that it's lacking mutexes, please redesign
 		if (!philos[i]->last_eat)
 		{
 			if ((time_now() - philos[i]->start_routine) > max_gap)
