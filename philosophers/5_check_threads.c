@@ -30,7 +30,26 @@ int all_eaten(t_philo **philos)
 	return (1);
 }
 
-int	check_each_philo(t_philo **philos)
+int	check_if_died(t_philo *philos)
+{
+	long long	max_gap;
+	long long	time_to_sub;
+
+	max_gap = (long long)(philos->data->time_to_die);
+	if (!philos->last_eat)
+		time_to_sub = philos->start_routine;
+	else if (philos->last_eat > 0)
+	{
+		pthread_mutex_lock(&philos->last_meal_mtx);
+		time_to_sub = philos->last_eat;
+		pthread_mutex_unlock(&philos->last_meal_mtx);
+	}
+	if (time_now() - time_to_sub > max_gap)
+		return (0);
+	return (1);
+}
+
+int	check_philos_status(t_philo **philos)
 {
 	int			i;
 	long long	max_gap;
@@ -39,21 +58,12 @@ int	check_each_philo(t_philo **philos)
 	i = 0;
 	while (i < philos[0]->data->philo_nr)
 	{
-		//the problem with this is that it's lacking mutexes, please redesign
-		if (!philos[i]->last_eat)
-		{
-			if ((time_now() - philos[i]->start_routine) > max_gap)
-				return (0);
-		}
-		else if (philos[i]->last_eat > 0)
-		{
-			if ((time_now() - philos[i]->last_eat) > max_gap)
-				return (0);
-		}
-		else
+		if (!check_if_died(philos[i]))
 			return (0);
 		i++;
 	}
+	if (all_eaten(philos))
+		return (0);
 	return (1);
 }
 
@@ -65,15 +75,12 @@ void	*monitor(void *philosophers)
 
 	while (1)
 	{
-        //checking each philo includes:
-		// 		1. did all of them eat enough
-		// 		2. did anyone die
-		// if one of these conditions is yes, then we must stop our simulation
-		// i.e. set the flag to 0 and exit everything gracefully     
-		if (!check_each_philo(philos))
+		//add sleeping
+		if (!check_philos_status(philos))
 			break ;
 	}
     //shut down operation
     philos[0]->data->all_alive = 0;
+	//printing and exiting correctly
 	return (NULL);
 }

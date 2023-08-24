@@ -12,20 +12,20 @@
 
 #include "philosophers.h"
 
-static void	free_philos(t_philo **philos, int i)
+void	set_philo_mutex(t_philo ***philosophers, t_data *data)
 {
-	int	j;
+	t_philo	**philos;
+	int		i;
 
-	j = 0;
-	while (j < i)
+	philos = *philosophers;
+	i = 0;
+	while (i < data->philo_nr)
 	{
-		if (philos[j])
-			free(philos[j]);
-		j++;
+		philos[i]->left_fork = data->fork_mutexes[i];
+		//error check if !
+		philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
+		i++;
 	}
-	free(philos);
-	//error note
-	exit(EXIT_FAILURE);
 }
 
 void	init_mutexes(t_data *data)
@@ -48,22 +48,21 @@ void	init_mutexes(t_data *data)
 	
 }
 
-void	set_philo_mutex(t_philo ***philosophers, t_data *data)
+static void	free_philos(t_philo **philos, int i)
 {
-	t_philo	**philos;
-	int		i;
+	int	j;
 
-	philos = *philosophers;
-	i = 0;
-	while (i < data->philo_nr)
+	j = 0;
+	while (j < i)
 	{
-		philos[i]->left_fork = data->fork_mutexes[i];
-		//error check if !
-		philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
-		i++;
+		if (philos[j])
+			free(philos[j]);
+		j++;
 	}
+	free(philos);
+	//error note
+	exit(EXIT_FAILURE);
 }
-
 
 static int	create_philo(t_philo ***philos, t_data *data, int i)
 {
@@ -74,7 +73,6 @@ static int	create_philo(t_philo ***philos, t_data *data, int i)
 		return (0);
 	philo->id = i + 1;
 	philo->eat_count = 0;
-	philo->start_routine = 0;
 	philo->last_eat = 0;
 	philo->data = data;
 	//error note
@@ -93,8 +91,6 @@ void	init_philos(t_philo ***philos, t_data *data)
 	//error note
 	if (!*philos)
 		exit(1);
-	//error note
-	init_mutexes(data);
 	i = 0;
 	while (i < data->philo_nr)
 	{
@@ -102,5 +98,7 @@ void	init_philos(t_philo ***philos, t_data *data)
 			free_philos(*philos, i);
 		i++;
 	}
+	//error note
+	init_mutexes(data);
 	set_philo_mutex(philos, data);
 }

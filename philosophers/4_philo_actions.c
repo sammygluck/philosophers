@@ -14,19 +14,18 @@
 
 void	log_action(t_philo *philo, char *str)
 {
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex_ptr;
 
-	mutex = philo->data->log_mutex;
-	pthread_mutex_lock(mutex);
+	mutex_ptr = &philo->data->log_mutex;
+	pthread_mutex_lock(mutex_ptr);
 	//note
 	printf("%llu %i %s\n", time_now(), philo->id, str);
-	pthread_mutex_unlock(mutex);
+	pthread_mutex_unlock(mutex_ptr);
 }
 
 void	*think_eat_sleep(void *arg)
 {
 	t_philo	*philo;
-    int i;
 	int all_alive;
 
 	philo = (t_philo *) arg;
@@ -35,14 +34,12 @@ void	*think_eat_sleep(void *arg)
 	pthread_mutex_lock(&philo->data->alive_mutex);
 	all_alive = philo->data->all_alive;
 	phtread_mutex_unlock(&philo->data->alive_mutex);
-    i = 0;
 	//A. As long as all alive && the max eating times hasn't been reached
     while (philo->data->all_alive)
    { 
         philo_think(philo);
         philo_eat(philo);
         philo_sleep(philo);
-        i++;
     }
     return (NULL);
 }

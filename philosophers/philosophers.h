@@ -55,7 +55,8 @@ void lonely_philo(t_philo *philo);
 void philo_sleep(t_philo *philo);
 long long time_now(void);
 void	*monitor(void *philosophers);
-int	check_each_philo(t_philo **philos);
+int	check_philos_status(t_philo **philos);
+int	check_if_died(t_philo *philos);
 int all_eaten(t_philo **philos);
 
 
