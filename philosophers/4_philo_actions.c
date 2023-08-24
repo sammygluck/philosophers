@@ -35,11 +35,14 @@ void	*think_eat_sleep(void *arg)
 	all_alive = philo->data->all_alive;
 	pthread_mutex_unlock(&philo->data->alive_mutex);
 	//A. As long as all alive && the max eating times hasn't been reached
-    while (philo->data->all_alive)
+    while (all_alive)
    { 
         philo_think(philo);
         philo_eat(philo);
         philo_sleep(philo);
+		pthread_mutex_lock(&philo->data->alive_mutex);
+		all_alive = philo->data->all_alive;
+		pthread_mutex_unlock(&philo->data->alive_mutex);
     }
     return (NULL);
 }
