@@ -67,5 +67,5 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 		pthread_join(philos[i]->tid, NULL);
 	i++;
 	}
-    pthread_join(monitor_tid, NULL);
+    //pthread_join(monitor_tid, NULL);
 }
