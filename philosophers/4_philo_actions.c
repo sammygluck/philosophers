@@ -60,12 +60,12 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 		pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]);
 		i++;
 	}
-    pthread_create(&monitor_tid, NULL, monitor, philosophers);
+    // pthread_create(&monitor_tid, NULL, monitor, philosophers);
 	i = 0;
 	while (i < data->philo_nr)
 	{
 		pthread_join(philos[i]->tid, NULL);
 	i++;
 	}
-    pthread_join(monitor_tid, NULL);
+    // pthread_join(monitor_tid, NULL);
 }
