@@ -37,7 +37,7 @@ int	check_if_died(t_philo *philos)
 
 	max_gap = (long long)(philos->data->time_to_die);
 	if (!philos->last_eat)
-		time_to_sub = philos->start_routine;
+		time_to_sub = philos->data->start_routine;
 	else if (philos->last_eat > 0)
 	{
 		pthread_mutex_lock(&philos->last_meal_mtx);
