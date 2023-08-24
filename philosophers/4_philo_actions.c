@@ -51,7 +51,7 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 {
 	t_philo	**philos;
 	int		i;
-    pthread_t monitor_tid;
+    //pthread_t monitor_tid;
 
 	i = 0;
 	philos = *philosophers;
