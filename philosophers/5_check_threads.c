@@ -52,9 +52,7 @@ int	check_if_died(t_philo *philos)
 int	check_philos_status(t_philo **philos)
 {
 	int			i;
-	long long	max_gap;
 
-	max_gap = (long long)(philos[0]->data->time_to_die);
 	i = 0;
 	while (i < philos[0]->data->philo_nr)
 	{
