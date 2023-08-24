@@ -46,7 +46,10 @@ void	init_data(t_data *data, int argc, char **argv)
 {
 	//error note + nothing malloced yet, just print message
 	if (!validate_cmd(argc, argv))
+	{
+		printf("init data error");
 		exit(EXIT_FAILURE);
+	}
 	//error note here for pthread_mutex_init failure
 	set_data(data, argc, argv);
 }
