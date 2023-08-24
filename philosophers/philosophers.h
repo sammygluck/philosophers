@@ -53,6 +53,7 @@ void put_forks_down(t_philo *philo);
 void pick_up_forks(t_philo *philo);
 void lonely_philo(t_philo *philo);
 void philo_sleep(t_philo *philo);
+void optimized_sleep(int to_sleep);
 long long time_now(void);
 void	*monitor(void *philosophers);
 int	check_philos_status(t_philo **philos);
