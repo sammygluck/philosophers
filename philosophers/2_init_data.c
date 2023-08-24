@@ -39,7 +39,7 @@ static void	set_data(t_data *data, int argc, char **argv)
 	data->start_routine = time_now();
 	//error notes return 0 upon failure to be handled in parent
 	pthread_mutex_init(&data->log_mutex, NULL);
-	pthread_mutex_init(&data->all_alive, NULL);
+	pthread_mutex_init(&data->alive_mutex, NULL);
 }
 
 void	init_data(t_data *data, int argc, char **argv)
