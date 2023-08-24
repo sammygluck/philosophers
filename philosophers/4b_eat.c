@@ -12,6 +12,9 @@
 
 #include "philosophers.h"
 
+//It might be functional, but I don't like it. 
+//In my opinion, lonely_philo should be handled seperately,
+//mainly because of the logging as there might be double logging
 void lonely_philo(t_philo *philo)
 {
 	long long time_of_death;
@@ -19,7 +22,7 @@ void lonely_philo(t_philo *philo)
 
 	time_of_death = philo->data->start_routine + philo->data->time_to_die;
 	while (time_now() < time_of_death)
-		usleep(10000)
+		usleep(10000);
 	pthread_mutex_unlock(philo->right_fork);
 	log_action(philo, "has died");
 	pthread_mutex_lock(&philo->data->alive_mutex);
@@ -35,7 +38,7 @@ void	pick_up_forks(t_philo *philo)
 		log_action(philo, "has taken a fork");
 		if (philo->data->philo_nr == 1)
 		{
-			lonenly_philo(philo);
+			lonely_philo(philo);
 			return ;
 		}
 		pthread_mutex_lock(philo->left_fork);
@@ -59,9 +62,9 @@ void	put_forks_down(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	pthread_mutex_t mutex;
+	pthread_mutex_t *mutex_ptr;
 
-	mutex = philo->eat_count_mtx;
+	mutex_ptr = &philo->eat_count_mtx;
 	//if there is only one philo => starve and die; location note
 	pick_up_forks(philo);
 	//does this need a mutex?
@@ -69,11 +72,10 @@ void	philo_eat(t_philo *philo)
 	log_action(philo, "is eating");
 	usleep(philo->data->time_to_eat * 1000);
 	put_forks_down(philo);
-	//mutex?
-	if (philo->eat_count >= 0)
+	if (philo->data->max_eats >= 0)
 	{
-		pthread_mutex_lock(&mutex);
+		pthread_mutex_lock(mutex_ptr);
 		philo->eat_count += 1;
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(mutex_ptr);
 	}
 }
