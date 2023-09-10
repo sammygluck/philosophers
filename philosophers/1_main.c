@@ -12,19 +12,7 @@
 
 #include "philosophers.h"
 
-//tmp
-void	print_philos(t_philo **philosophers, int count)
-{
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		//note
-		printf("%i\n", philosophers[i]->id);
-		i++;
-	}
-}
+//void	print_philos(t_philo **philosophers, int count);
 
 int	main(int argc, char **argv)
 {
@@ -36,4 +24,19 @@ int	main(int argc, char **argv)
 	init_philos(&philosophers, &data);
 	run_philos(&philosophers, &data);
 	//print_philos(philosophers, data.philo_nr);
+	//free everything
 }
+
+//tmp
+// void	print_philos(t_philo **philosophers, int count)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < count)
+// 	{
+// 		//note
+// 		printf("%i\n", philosophers[i]->id);
+// 		i++;
+// 	}
+// }

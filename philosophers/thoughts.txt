@@ -45,3 +45,21 @@ TODO:
 	
 	
 	
+----------------------------------------
+
+current situation:
+	1. The main issue
+	When running the code with any parameters, it seems to start, but unfortunately
+	it doesn't continue to the amount of necessary runtimes. It might start correctly, but why doesn't it
+	wait for the join to be activated. What is causing this code not to finish to the end? It's not clear.
+	Have any of the variables been changed? That is the question. I'm not sure what to make of this. 
+	2. Debugging solutions
+	What can be done to debug the issue? 
+		a. ChatGPT
+		I can use the chat to run through my code and check it through properly.
+		b. Manual checking
+		Manually checking through the code is another possibility. 
+		c. Comparing with another repository
+		I can also compare to another known depository, which I'll probably try to do
+	Using these techniques, hopefully I'll have a broader perspective on the issue at hand.
+	

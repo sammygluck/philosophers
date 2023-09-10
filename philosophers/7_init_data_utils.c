@@ -26,9 +26,9 @@ int	is_str_all_digit(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (!str || !str[i])
+	if (!str || !str[0])
 		return (0);
+	i = 0;
 	while (str[i])
 	{
 		if (!ft_is_digit(str[i]))

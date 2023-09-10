@@ -24,15 +24,15 @@ typedef struct data {
 } t_data;
 
 typedef struct s_philo {
-    int id;
-    pthread_t tid;
+    int id; 
     int eat_count;
-    t_data *data;
+    long long last_eat;
+    pthread_t tid;
     pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
-    long long last_eat;
     pthread_mutex_t last_meal_mtx;
     pthread_mutex_t eat_count_mtx;
+    t_data *data;
     
 } t_philo;
 

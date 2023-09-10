@@ -57,9 +57,11 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 	philos = *philosophers;
 	while (i < data->philo_nr)
 	{
+		//error note
 		pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]);
 		i++;
 	}
+	//error note
     pthread_create(&monitor_tid, NULL, monitor, philosophers);
 	i = 0;
 	while (i < data->philo_nr)

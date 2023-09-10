@@ -12,17 +12,24 @@
 
 #include "philosophers.h"
 
-static int	validate_cmd(int argc, char **argv)
+void	init_mutexes(t_data *data)
 {
 	int	i;
 
-	if (argc != 5 && argc != 6)
-		return (0);
-	i = 1;
-	while (i < argc)
-		if (!is_str_all_digit(argv[i++]))
-			return (0);
-	return (1);
+	data->fork_mutexes = malloc(sizeof(pthread_mutex_t *) * data->philo_nr);
+	//error-note
+	if (!data->fork_mutexes)
+		exit(EXIT_FAILURE);
+	i = 0;
+	while (i < data->philo_nr)
+	{
+		//error-note
+		data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
+		//error-note
+		pthread_mutex_init(data->fork_mutexes[i], NULL);
+		i++;
+	}
+	
 }
 
 static void	set_data(t_data *data, int argc, char **argv)
@@ -39,15 +46,30 @@ static void	set_data(t_data *data, int argc, char **argv)
 	data->start_routine = time_now();
 	//error notes return 0 upon failure to be handled in parent
 	pthread_mutex_init(&data->log_mutex, NULL);
+	//error note
+	init_mutexes(data);
 	pthread_mutex_init(&data->alive_mutex, NULL);
+}
+
+static int	validate_cmd(int argc, char **argv)
+{
+	int	i;
+
+	if (argc != 5 && argc != 6)
+		return (0);
+	i = 1;
+	while (i < argc)
+		if (!is_str_all_digit(argv[i++]))
+			return (0);
+	return (1);
 }
 
 void	init_data(t_data *data, int argc, char **argv)
 {
-	//error note + nothing malloced yet, just print message
+	//error note + nothing malloced yet, just print message (is printf allowed?)
 	if (!validate_cmd(argc, argv))
 	{
-		printf("init data error");
+		printf("validate command args error\n");
 		exit(EXIT_FAILURE);
 	}
 	//error note here for pthread_mutex_init failure
