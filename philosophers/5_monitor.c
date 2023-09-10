@@ -64,8 +64,9 @@ int	check_philos_status(t_philo **philos)
 			return (0);
 		i++;
 	}
-	if (all_eaten(philos))
-		return (0);
+	if (philos[0]->data->max_eats >= 0)
+		if (all_eaten(philos))
+			return (0);
 	return (1);
 }
 
