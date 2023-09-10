@@ -79,7 +79,7 @@ void	*monitor(void *philosophers)
 	while (1)
 	{
 		//add sleeping
-		usleep(1000);
+		//usleep(1000);
 		if (!check_philos_status(philos))
 			break ;
 	}
