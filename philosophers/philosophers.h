@@ -48,7 +48,7 @@ void run_philos(t_philo ***philosophers, t_data *data);
 void *think_eat_sleep(void *arg);
 void log_action(t_philo *philo, char *str);
 void philo_think(t_philo *philo);
-void philo_eat(t_philo *philo);
+int philo_eat(t_philo *philo);
 void put_forks_down(t_philo *philo);
 void pick_up_forks(t_philo *philo);
 void lonely_philo(t_philo *philo);

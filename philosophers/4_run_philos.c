@@ -31,18 +31,18 @@ void	*think_eat_sleep(void *arg)
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 0)
 		usleep((philo->data->time_to_eat / 2) * 1000);
-	pthread_mutex_lock(&philo->data->alive_mutex);
-	all_alive = philo->data->all_alive;
-	pthread_mutex_unlock(&philo->data->alive_mutex);
 	//A. As long as all alive && the max eating times hasn't been reached
-    while (all_alive)
+    while (1)
    { 
+	 	pthread_mutex_lock(&philo->data->alive_mutex);
+    	all_alive = philo->data->all_alive;
+    	pthread_mutex_unlock(&philo->data->alive_mutex);
+    	if (!all_alive) 
+			break;
         philo_think(philo);
-        philo_eat(philo);
+        if (!philo_eat(philo))
+			break;
         philo_sleep(philo);
-		pthread_mutex_lock(&philo->data->alive_mutex);
-		all_alive = philo->data->all_alive;
-		pthread_mutex_unlock(&philo->data->alive_mutex);
     }
     return (NULL);
 }
