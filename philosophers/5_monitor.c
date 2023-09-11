@@ -46,8 +46,8 @@ int	check_if_died(t_philo *philos)
 		time_to_sub = last_eat;
 	if (time_now() - time_to_sub > max_gap)
 	{
-		//conditional: only if there is more than one philo
-		log_action(philos, "has died");
+		if (philos->data->philo_nr > 1)
+			log_action(philos, "has died");
 		return (0);
 	}
 	return (1);
