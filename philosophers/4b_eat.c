@@ -60,13 +60,20 @@ void	put_forks_down(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-void	philo_eat(t_philo *philo)
+int	philo_eat(t_philo *philo)
 {
 	pthread_mutex_t *mutex_ptr;
 
 	mutex_ptr = &philo->eat_count_mtx;
 	//if there is only one philo => starve and die; location note
 	pick_up_forks(philo);
+	//check if dead and if yes, end
+	pthread_mutex_lock(&philo->data->alive_mutex);
+	if (philo->data->all_alive = 0)
+		{
+			pthread_mutex_unlock(&philo->data->alive_mutex);
+			return (0);
+		}
 	//does this need a mutex?
 	philo->last_eat = time_now();
 	log_action(philo, "is eating");
@@ -78,4 +85,5 @@ void	philo_eat(t_philo *philo)
 		philo->eat_count += 1;
 		pthread_mutex_unlock(mutex_ptr);
 	}
+	return (1);
 }
