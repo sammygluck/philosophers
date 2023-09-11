@@ -74,6 +74,7 @@ int	philo_eat(t_philo *philo)
 			pthread_mutex_unlock(&philo->data->alive_mutex);
 			return (0);
 		}
+	pthread_mutex_unlock(&philo->data->alive_mutex);
 	//does this need a mutex?
 	philo->last_eat = time_now();
 	log_action(philo, "is eating");
