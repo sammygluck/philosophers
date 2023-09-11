@@ -69,7 +69,7 @@ int	philo_eat(t_philo *philo)
 	pick_up_forks(philo);
 	//check if dead and if yes, end
 	pthread_mutex_lock(&philo->data->alive_mutex);
-	if (philo->data->all_alive = 0)
+	if (philo->data->all_alive == 0)
 		{
 			pthread_mutex_unlock(&philo->data->alive_mutex);
 			return (0);
