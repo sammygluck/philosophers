@@ -41,7 +41,7 @@ void	*think_eat_sleep(void *arg)
     	pthread_mutex_unlock(&philo->data->alive_mutex);
     	if (!all_alive) 
 			break;
-        philo_think(philo);
+        log_action(philo, "is thinking");
         if (!philo_eat(philo))
 			break;
         philo_sleep(philo);
