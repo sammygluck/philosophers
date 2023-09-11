@@ -19,12 +19,17 @@ void	set_philo_mutex(t_philo ***philosophers, t_data *data)
 
 	philos = *philosophers;
 	i = 0;
-	while (i < data->philo_nr)
+	while (i < data->philo_nr - 1)
 	{
 		philos[i]->left_fork = data->fork_mutexes[i];
 		//error check if ! (???what did I mean, maybe lonely philo?)
 		philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
 		i++;
+	}
+	if (i == data->philo_nr - 1)
+	{
+		philos[i]->left_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
+		philos[i]->right_fork = data->fork_mutexes[i];	
 	}
 }
 
