@@ -15,11 +15,13 @@
 void	log_action(t_philo *philo, char *str)
 {
 	pthread_mutex_t	*mutex_ptr;
+	long long relative_time;
 
+	relative_time = time_now() - philo->data->start_routine;
 	mutex_ptr = &philo->data->log_mutex;
 	pthread_mutex_lock(mutex_ptr);
 	//note
-	printf("%llu %i %s\n", time_now(), philo->id, str);
+	printf("%llu %i %s\n", relative_time, philo->id, str);
 	pthread_mutex_unlock(mutex_ptr);
 }
 
