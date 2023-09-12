@@ -78,7 +78,7 @@ int	philo_eat(t_philo *philo)
 	//does this need a mutex?
 	philo->last_eat = time_now();
 	log_action(philo, "is eating");
-	usleep(philo->data->time_to_eat * 1000);
+	optimized_sleep(philo->data->time_to_eat * 1000);
 	put_forks_down(philo);
 	if (philo->data->max_eats >= 0)
 	{
