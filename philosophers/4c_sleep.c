@@ -26,8 +26,6 @@ long long	time_now(void)
 //it can be more fair to split up the sleeping sessions
 void	philo_sleep(t_philo *philo)
 {
-	int	microseconds;
-
 	log_action(philo, "sleeping");
 	optimized_sleep(philo->data->time_to_sleep);
 }
