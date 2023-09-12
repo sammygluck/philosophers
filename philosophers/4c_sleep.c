@@ -30,7 +30,7 @@ void	philo_sleep(t_philo *philo)
 
 	log_action(philo, "sleeping");
 	microseconds = philo->data->time_to_sleep * 1000;
-	optimized_sleep(microseconds);
+	usleep(microseconds);
 }
 
 void optimized_sleep(int to_sleep)
