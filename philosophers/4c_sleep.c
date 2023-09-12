@@ -36,10 +36,10 @@ void	philo_sleep(t_philo *philo)
 void optimized_sleep(int to_sleep)
 {
 	long long current_time;
-	long long time_to_add;
+	//long long time_to_add;
 
 	current_time = time_now();
-	time_to_add = (long long) to_sleep;
-	while (time_now() < (current_time + time_to_add))
+	//time_to_add = (long long) to_sleep;
+	while ((time_now() - current_time) < to_sleep)
 		usleep(500);
 }
