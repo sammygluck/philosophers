@@ -32,7 +32,7 @@ void	*think_eat_sleep(void *arg)
 
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 0)
-		optimized_sleep((philo->data->time_to_eat / 2) * 1000);
+		optimized_sleep((philo->data->time_to_eat / 2));
 	//A. As long as all alive && the max eating times hasn't been reached
     while (1)
    { 
