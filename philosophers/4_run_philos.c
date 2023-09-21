@@ -60,12 +60,29 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 	while (i < data->philo_nr)
 	{
 		//error note
-		pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]);
+		if (pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]))
+		{
+			shut_down(data);
+			while (i > 0)
+				pthread_join(philos[--i]->tid, NULL);
+			free_stuff(data, philos);
+			printf("pthread_create routine failure\n");
+			exit(EXIT_FAILURE);
+		}
+		//destroy all mutexes ??besides for the forks??
 		i++;
 	}
 	//error note
-    pthread_create(&monitor_tid, NULL, monitor, philosophers);
 	i = 0;
+    if (pthread_create(&monitor_tid, NULL, monitor, philosophers))
+	{
+		shut_down(data);
+		while (i < data->philo_nr)
+			pthread_join(philos[i++]->tid, NULL);
+		free_stuff(data, philos);
+		printf("pthread_create monitor failure\n");
+		exit(EXIT_FAILURE);
+	}
 	while (i < data->philo_nr)
 	{
 		pthread_join(philos[i]->tid, NULL);

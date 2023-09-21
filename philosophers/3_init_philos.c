@@ -21,31 +21,36 @@ void	set_philo_mutex(t_philo ***philosophers, t_data *data)
 	i = 0;
 	while (i < data->philo_nr - 1)
 	{
-		philos[i]->left_fork = data->fork_mutexes[i];
+		philos[i]->left_fork = &data->fork_mutexes[i];
 		//error check if ! (???what did I mean, maybe lonely philo?)
-		philos[i]->right_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
+		philos[i]->right_fork = &data->fork_mutexes[(i + 1) % data->philo_nr];
 		i++;
 	}
 	if (i == data->philo_nr - 1)
 	{
-		philos[i]->left_fork = data->fork_mutexes[(i + 1) % data->philo_nr];
-		philos[i]->right_fork = data->fork_mutexes[i];	
+		philos[i]->left_fork = &data->fork_mutexes[(i + 1) % data->philo_nr];
+		philos[i]->right_fork = &data->fork_mutexes[i];	
 	}
 }
 
-static void	free_philos(t_philo **philos, int i)
+static void	free_philos_and_exit(t_data *data, t_philo **philos, int i)
 {
 	int	j;
 
 	j = 0;
+	destroy_mutexes(data);
 	while (j < i)
 	{
 		if (philos[j])
+		{
+			pthread_mutex_destroy(&philos[j]->last_meal_mtx);
+			pthread_mutex_destroy(&philos[j]->eat_count_mtx);
 			free(philos[j]);
+		}
 		j++;
 	}
 	free(philos);
-	//error note
+	printf("couldn't malloc philo_array individuals\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -73,15 +78,18 @@ void	init_philos(t_philo ***philos, t_data *data)
 	int	i;
 
 	*philos = malloc(data->philo_nr * sizeof(t_philo *));
-	//error note, free fork_mutexes
 	if (!*philos)
-		exit(1);
+	{
+		destroy_mutexes(data);
+		printf("couldn't malloc philo_array\n");
+		exit(EXIT_FAILURE);
+	}
 	i = 0;
 	while (i < data->philo_nr)
 	{
 		//error note, also free mutexes, print error
 		if (!create_philo(philos, data, i))
-			free_philos(*philos, i);
+			free_philos_and_exit(data, *philos, i);	
 		i++;
 	}
 	set_philo_mutex(philos, data);

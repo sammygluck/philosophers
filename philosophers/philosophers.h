@@ -19,7 +19,7 @@ typedef struct data {
     int all_alive;
     long long start_routine;
     pthread_mutex_t log_mutex; 
-    pthread_mutex_t **fork_mutexes;
+    pthread_mutex_t *fork_mutexes;
     pthread_mutex_t alive_mutex;
 } t_data;
 
@@ -59,6 +59,9 @@ void	*monitor(void *philosophers);
 int	check_philos_status(t_philo **philos);
 int	check_if_died(t_philo *philos);
 int all_eaten(t_philo **philos);
-
+void free_stuff(t_data *data, t_philo **philosophers);
+void destroy_mutexes(t_data *data);
+void free_philos(t_data *data, t_philo **philosophers);
+void shut_down(t_data *data);
 
 #endif

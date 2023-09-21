@@ -16,17 +16,20 @@ void	init_mutexes(t_data *data)
 {
 	int	i;
 
-	data->fork_mutexes = malloc(sizeof(pthread_mutex_t *) * data->philo_nr);
+	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->philo_nr);
 	//error-note
 	if (!data->fork_mutexes)
+	{
+		printf("malloc failure mutex array\n");
 		exit(EXIT_FAILURE);
+	}
+		
 	i = 0;
 	while (i < data->philo_nr)
 	{
 		//error-note
-		data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
-		//error-note
-		pthread_mutex_init(data->fork_mutexes[i], NULL);
+		//data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init(&data->fork_mutexes[i], NULL);
 		i++;
 	}
 	
@@ -44,7 +47,7 @@ static void	set_data(t_data *data, int argc, char **argv)
 		data->max_eats = -1;
 	data->all_alive = 1;
 	data->start_routine = time_now();
-	//error notes return 0 upon failure to be handled in parent
+	//error notes return non-0 upon failure to be handled in parent
 	pthread_mutex_init(&data->log_mutex, NULL);
 	//error note
 	init_mutexes(data);
@@ -66,7 +69,7 @@ static int	validate_cmd(int argc, char **argv)
 
 void	init_data(t_data *data, int argc, char **argv)
 {
-	//error note + nothing malloced yet, just print message (is printf allowed?)
+	//error note + nothing malloced yet, just print message 
 	if (!validate_cmd(argc, argv))
 	{
 		printf("validate command args error\n");
@@ -74,4 +77,5 @@ void	init_data(t_data *data, int argc, char **argv)
 	}
 	//error note here for pthread_mutex_init failure
 	set_data(data, argc, argv);
+
 }
