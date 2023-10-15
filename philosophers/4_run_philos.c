@@ -18,9 +18,9 @@ void	log_action(t_philo *philo, char *str)
 	pthread_mutex_t	*mutex_ptr;
 	long long relative_time;
 
-	pthread_mutex_lock(philo->data->alive_mutex);
+	pthread_mutex_lock(&philo->data->alive_mutex);
 	all_alive = philo->data->all_alive;
-	pthread_mutex_unlock(philo->data->alive_mutex);
+	pthread_mutex_unlock(&philo->data->alive_mutex);
 	if (all_alive == 0)
 		return ;
 	relative_time = time_now() - philo->data->start_routine;
@@ -58,7 +58,6 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 {
 	t_philo	**philos;
 	int		i;
-    pthread_t monitor_tid;
 
 	i = 0;
 	philos = *philosophers;

@@ -56,7 +56,7 @@ void	philo_eat(t_philo *philo)
 
 	mutex_ptr = &philo->eat_count_mtx;
 	//if there is only one philo => starve and die; location note
-	if (!pick_up_forks(philo));
+	if (!pick_up_forks(philo))
 		return ;
 	//does this need a mutex?
 	philo->last_eat = time_now();
