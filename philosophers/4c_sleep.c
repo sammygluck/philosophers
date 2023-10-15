@@ -23,7 +23,6 @@ long long	time_now(void)
 	return (now_ms);
 }
 
-//it can be more fair to split up the sleeping sessions
 void	philo_sleep(t_philo *philo)
 {
 	log_action(philo, "sleeping");
@@ -32,11 +31,11 @@ void	philo_sleep(t_philo *philo)
 
 void optimized_sleep(int to_sleep)
 {
-	long long current_time;
+	long long start_time;
 	//long long time_to_add;
 
-	current_time = time_now();
+	start_time = time_now();
 	//time_to_add = (long long) to_sleep;
-	while ((time_now() - current_time) < to_sleep)
+	while ((time_now() - start_time) < to_sleep)
 		usleep(500);
 }

@@ -38,6 +38,8 @@ void	init_mutexes(t_data *data)
 static void	set_data(t_data *data, int argc, char **argv)
 {
 	data->philo_nr = ft_atoi(argv[1]);
+	if (data->philo_nr <= 0)
+		exit(EXIT_FAILURE);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
@@ -49,9 +51,9 @@ static void	set_data(t_data *data, int argc, char **argv)
 	data->start_routine = time_now();
 	//error notes return non-0 upon failure to be handled in parent
 	pthread_mutex_init(&data->log_mutex, NULL);
+	pthread_mutex_init(&data->alive_mutex, NULL);
 	//error note
 	init_mutexes(data);
-	pthread_mutex_init(&data->alive_mutex, NULL);
 }
 
 static int	validate_cmd(int argc, char **argv)

@@ -34,20 +34,14 @@ int	check_if_died(t_philo *philos)
 {
 	long long	max_gap;
 	long long	time_to_sub;
-	long long	last_eat;
 
 	pthread_mutex_lock(&philos->last_meal_mtx);
-	last_eat = philos->last_eat;
+	time_to_sub = philos->last_eat;
 	pthread_mutex_unlock(&philos->last_meal_mtx);
-	max_gap = (long long)(philos->data->time_to_die);
-	if (!last_eat)
-		time_to_sub = philos->data->start_routine;
-	else if (last_eat > 0)
-		time_to_sub = last_eat;
 	if (time_now() - time_to_sub > max_gap)
 	{
-		if (philos->data->philo_nr > 1)
-			log_action(philos, "has died");
+		log_action(philos, "has died");
+		shut_down(philos->data);
 		return (0);
 	}
 	return (1);
@@ -66,16 +60,18 @@ int	check_philos_status(t_philo **philos)
 	}
 	if (philos[0]->data->max_eats >= 0)
 		if (all_eaten(philos))
+		{
+			shut_down(philos[0]->data);
 			return (0);
+		}
 	return (1);
 }
 
-void	*monitor(void *philosophers)
+void	monitor(t_philo ***philosophers)
 {
 	t_philo	**philos;
 
-	philos = *(t_philo ***)philosophers;
-
+	philos = *philosophers;
 	while (1)
 	{
 		//add sleeping
@@ -83,10 +79,6 @@ void	*monitor(void *philosophers)
 		if (!check_philos_status(philos))
 			break ;
 	}
-    //shut down operation
-	pthread_mutex_lock(&philos[0]->data->alive_mutex);
-    philos[0]->data->all_alive = 0;
-	pthread_mutex_unlock(&philos[0]->data->alive_mutex);
 	//printing and exiting correctly
-	return (NULL);
+	return ;
 }
