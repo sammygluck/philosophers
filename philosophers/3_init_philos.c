@@ -19,17 +19,12 @@ void	set_philo_mutex(t_philo ***philosophers, t_data *data)
 
 	philos = *philosophers;
 	i = 0;
-	while (i < data->philo_nr - 1)
+	while (i <= data->philo_nr - 1)
 	{
 		philos[i]->left_fork = &data->fork_mutexes[i];
 		//error check if ! (???what did I mean, maybe lonely philo?)
 		philos[i]->right_fork = &data->fork_mutexes[(i + 1) % data->philo_nr];
 		i++;
-	}
-	if (i == data->philo_nr - 1)
-	{
-		philos[i]->left_fork = &data->fork_mutexes[(i + 1) % data->philo_nr];
-		philos[i]->right_fork = &data->fork_mutexes[i];	
 	}
 }
 
@@ -63,7 +58,7 @@ static int	create_philo(t_philo ***philos, t_data *data, int i)
 		return (0);
 	philo->id = i + 1;
 	philo->eat_count = 0;
-	philo->last_eat = 0;
+	philo->last_eat = data->start_routine;
 	philo->data = data;
 	//error note
 	pthread_mutex_init(&philo->last_meal_mtx, NULL);
