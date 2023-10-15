@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2_pars_cmd.c                                       :+:      :+:    :+:   */
+/*   2_init_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:01:38 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 12:07:46 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/15 15:34:10 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init_mutexes(t_data *data)
 		printf("malloc failure mutex array\n");
 		exit(EXIT_FAILURE);
 	}
-		
 	i = 0;
 	while (i < data->philo_nr)
 	{
@@ -31,8 +30,7 @@ void	init_mutexes(t_data *data)
 		//data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(&data->fork_mutexes[i], NULL);
 		i++;
-	}
-	
+	}	
 }
 
 static void	set_data(t_data *data, int argc, char **argv)

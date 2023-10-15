@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:25:23 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 12:27:14 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/15 08:18:57 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ void	philo_sleep(t_philo *philo)
 	optimized_sleep(philo->data->time_to_sleep);
 }
 
-void optimized_sleep(int to_sleep)
+void	optimized_sleep(int to_sleep)
 {
-	long long start_time;
-	//long long time_to_add;
+	long long	start_time;
 
 	start_time = time_now();
-	//time_to_add = (long long) to_sleep;
 	while ((time_now() - start_time) < to_sleep)
 		usleep(500);
 }

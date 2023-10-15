@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   5_check_threads.c                                  :+:      :+:    :+:   */
+/*   5_monitor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:27:21 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 12:31:04 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/15 08:18:26 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int all_eaten(t_philo **philos)
+int	all_eaten(t_philo **philos)
 {
-	int i;
-	int eat_count;
+	int	i;
+	int	eat_count;
 
 	i = 0;
 	while (i < philos[0]->data->philo_nr)
@@ -60,11 +60,13 @@ int	check_philos_status(t_philo **philos)
 		i++;
 	}
 	if (philos[0]->data->max_eats >= 0)
+	{
 		if (all_eaten(philos))
 		{
 			shut_down(philos[0]->data);
 			return (0);
 		}
+	}
 	return (1);
 }
 

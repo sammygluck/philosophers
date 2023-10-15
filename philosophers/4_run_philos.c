@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4_philo_actions.c                                  :+:      :+:    :+:   */
+/*   4_run_philos.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:20:24 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 13:15:08 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/15 08:23:20 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	log_action(t_philo *philo, char *str)
 {
-	int	all_alive;
 	pthread_mutex_t	*mutex_ptr;
-	long long relative_time;
+	long long		relative_time;
+	int				all_alive;
 
 	pthread_mutex_lock(&philo->data->alive_mutex);
 	all_alive = philo->data->all_alive;
@@ -34,24 +34,24 @@ void	log_action(t_philo *philo, char *str)
 void	*think_eat_sleep(void *arg)
 {
 	t_philo	*philo;
-	int all_alive;
+	int		all_alive;
 
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 0)
 		optimized_sleep((philo->data->time_to_eat / 2));
 	//A. As long as all alive && the max eating times hasn't been reached
-    while (1)
-   { 
-	 	pthread_mutex_lock(&philo->data->alive_mutex);
-    	all_alive = philo->data->all_alive;
-    	pthread_mutex_unlock(&philo->data->alive_mutex);
-    	if (!all_alive) 
-			break;
-        log_action(philo, "is thinking");
-        philo_eat(philo);
-        philo_sleep(philo);
-    }
-    return (NULL);
+	while (1)
+	{
+		pthread_mutex_lock(&philo->data->alive_mutex);
+		all_alive = philo->data->all_alive;
+		pthread_mutex_unlock(&philo->data->alive_mutex);
+		if (!all_alive)
+			break ;
+		log_action(philo, "is thinking");
+		philo_eat(philo);
+		philo_sleep(philo);
+	}
+	return (NULL);
 }
 
 void	run_philos(t_philo ***philosophers, t_data *data)
@@ -63,7 +63,6 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 	philos = *philosophers;
 	while (i < data->philo_nr)
 	{
-		//error note
 		if (pthread_create(&philos[i]->tid, NULL, think_eat_sleep, philos[i]))
 		{
 			shut_down(data);
@@ -76,7 +75,6 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 		//destroy all mutexes ??besides for the forks??
 		i++;
 	}
-	//error note
 	monitor(philosophers);
 	i = 0;
 	while (i < data->philo_nr)
