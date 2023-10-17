@@ -66,8 +66,8 @@ static int	create_philo(t_philo ***philos, t_data *data, int i)
 	}
 	if (pthread_mutex_init(&philo->eat_count_mtx, NULL))
 	{
-		free(philo);
 		pthread_mutex_destroy(&philo->last_meal_mtx);
+		free(philo);
 		return (0);
 	}
 	(*philos)[i] = philo;
