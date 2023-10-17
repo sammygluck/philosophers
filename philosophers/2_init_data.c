@@ -12,7 +12,22 @@
 
 #include "philosophers.h"
 
-void	init_mutexes(t_data *data)
+static int init_mutexes_failure(t_data *data, int i)
+{
+	int j;
+
+	j = 0;
+	while (j < i)
+	{
+		pthread_mutex_destroy(&data->fork_mutexes[j]);
+		j++;
+	}
+	free (data->fork_mutexes);
+	return (0);
+}
+
+
+int	init_mutexes(t_data *data)
 {
 	int	i;
 
@@ -21,19 +36,20 @@ void	init_mutexes(t_data *data)
 	if (!data->fork_mutexes)
 	{
 		printf("malloc failure mutex array\n");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	i = 0;
 	while (i < data->philo_nr)
 	{
 		//error-note
-		//data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init(&data->fork_mutexes[i], NULL);
+		if (pthread_mutex_init(&data->fork_mutexes[i], NULL))
+			return (init_mutexes_failure(data, i));
 		i++;
-	}	
+	}
+	return (1);	
 }
 
-static void	set_data(t_data *data, int argc, char **argv)
+static int	set_data(t_data *data, int argc, char **argv)
 {
 	data->philo_nr = ft_atoi(argv[1]);
 	if (data->philo_nr <= 0)
@@ -48,10 +64,21 @@ static void	set_data(t_data *data, int argc, char **argv)
 	data->all_alive = 1;
 	data->start_routine = time_now();
 	//error notes return non-0 upon failure to be handled in parent
-	pthread_mutex_init(&data->log_mutex, NULL);
-	pthread_mutex_init(&data->alive_mutex, NULL);
+	if (pthread_mutex_init(&data->log_mutex, NULL))
+		return (0);
+	if (pthread_mutex_init(&data->alive_mutex, NULL))
+	{
+		pthread_mutex_destroy(&data->log_mutex);
+		return (0);
+	}
 	//error note
-	init_mutexes(data);
+	if (!init_mutexes(data))
+	{
+		pthread_mutex_destroy(&data->log_mutex);
+		pthread_mutex_destroy(&data->alive_mutex);
+		return (0);
+	}
+	return (1);
 }
 
 static int	validate_cmd(int argc, char **argv)
@@ -67,15 +94,16 @@ static int	validate_cmd(int argc, char **argv)
 	return (1);
 }
 
-void	init_data(t_data *data, int argc, char **argv)
+int	init_data(t_data *data, int argc, char **argv)
 {
 	//error note + nothing malloced yet, just print message 
 	if (!validate_cmd(argc, argv))
 	{
 		printf("validate command args error\n");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	//error note here for pthread_mutex_init failure
-	set_data(data, argc, argv);
-
+	if (!set_data(data, argc, argv))
+		return (0);
+	return (1);
 }

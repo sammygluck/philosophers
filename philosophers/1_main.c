@@ -20,8 +20,10 @@ int	main(int argc, char **argv)
 	t_philo	**philosophers;
 
 	philosophers = NULL;
-	init_data(&data, argc, argv);
-	init_philos(&philosophers, &data);
+	if (!init_data(&data, argc, argv))
+		return (-1);
+	if (!init_philos(&philosophers, &data))
+		return (-1);
 	run_philos(&philosophers, &data);
 	free_stuff(&data, philosophers);
 }
