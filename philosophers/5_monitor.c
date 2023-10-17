@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:27:21 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/15 08:18:26 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:37:40 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	monitor(t_philo ***philosophers)
 	philos = *philosophers;
 	while (1)
 	{
-		//add sleeping
-		//usleep(1000);
 		if (!check_philos_status(philos))
 			break ;
 	}

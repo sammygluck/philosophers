@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:20:24 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/15 08:23:20 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:40:30 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	*think_eat_sleep(void *arg)
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 0)
 		optimized_sleep((philo->data->time_to_eat / 2));
-	//A. As long as all alive && the max eating times hasn't been reached
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->alive_mutex);

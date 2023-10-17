@@ -6,15 +6,15 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:01:38 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/15 15:34:10 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/17 11:48:45 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int init_mutexes_failure(t_data *data, int i)
+static int	init_mutexes_failure(t_data *data, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < i)
@@ -25,7 +25,6 @@ static int init_mutexes_failure(t_data *data, int i)
 	free (data->fork_mutexes);
 	return (0);
 }
-
 
 int	init_mutexes(t_data *data)
 {
@@ -46,7 +45,7 @@ int	init_mutexes(t_data *data)
 			return (init_mutexes_failure(data, i));
 		i++;
 	}
-	return (1);	
+	return (1);
 }
 
 static int	set_data(t_data *data, int argc, char **argv)
@@ -63,7 +62,6 @@ static int	set_data(t_data *data, int argc, char **argv)
 		data->max_eats = -1;
 	data->all_alive = 1;
 	data->start_routine = time_now();
-	//error notes return non-0 upon failure to be handled in parent
 	if (pthread_mutex_init(&data->log_mutex, NULL))
 		return (0);
 	if (pthread_mutex_init(&data->alive_mutex, NULL))
@@ -71,7 +69,6 @@ static int	set_data(t_data *data, int argc, char **argv)
 		pthread_mutex_destroy(&data->log_mutex);
 		return (0);
 	}
-	//error note
 	if (!init_mutexes(data))
 	{
 		pthread_mutex_destroy(&data->log_mutex);
@@ -102,7 +99,7 @@ int	init_data(t_data *data, int argc, char **argv)
 		printf("validate command args error\n");
 		return (0);
 	}
-	//error note here for pthread_mutex_init failure
+	//error note here for pthread_mutex_init failure + print message
 	if (!set_data(data, argc, argv))
 		return (0);
 	return (1);

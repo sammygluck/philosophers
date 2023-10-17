@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:23:42 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 12:25:12 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/17 12:04:31 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 //It might be functional, but I don't like it. 
 //In my opinion, lonely_philo should be handled seperately,
 //mainly because of the logging as there might be double logging
-void lonely_philo(t_philo *philo)
+void	lonely_philo(t_philo *philo)
 {
-	long long time_of_death;
+	long long	time_of_death;
 
 	pthread_mutex_lock(philo->right_fork);
 	log_action(philo, "has taken a fork");
@@ -52,7 +52,7 @@ void	put_forks_down(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	pthread_mutex_t *mutex_ptr;
+	pthread_mutex_t	*mutex_ptr;
 
 	mutex_ptr = &philo->eat_count_mtx;
 	//if there is only one philo => starve and die; location note

@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:11:45 by sgluck            #+#    #+#             */
-/*   Updated: 2023/08/10 12:16:54 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/17 12:03:27 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	init_philos(t_philo ***philos, t_data *data)
 	while (i < data->philo_nr)
 	{
 		if (!create_philo(philos, data, i))
-			return (free_philos_and_exit(data, *philos, i));	
+			return (free_philos_and_exit(data, *philos, i));
 		i++;
 	}
 	set_philo_mutex(philos, data);
