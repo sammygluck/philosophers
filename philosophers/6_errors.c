@@ -58,3 +58,13 @@ void	shut_down(t_data *data)
 	data->all_alive = 0;
 	pthread_mutex_unlock(&data->alive_mutex);
 }
+
+int    set_data_failure(t_data *data, int i)
+{
+    if (i > 1)
+        pthread_mutex_desroy(&data->alive_mutex);
+    if (i > 0)
+        pthread_mutex_destroy(&data->log_mutex);
+    printf("failure in setting and creating data mutexes\n");
+    return (0);
+}

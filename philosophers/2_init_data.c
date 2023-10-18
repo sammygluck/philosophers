@@ -61,19 +61,11 @@ static int	set_data(t_data *data, int argc, char **argv)
 	data->all_alive = 1;
 	data->start_routine = time_now();
 	if (pthread_mutex_init(&data->log_mutex, NULL))
-		return (0);
+		return (set_data_failure(data, 0));
 	if (pthread_mutex_init(&data->alive_mutex, NULL))
-	{
-		pthread_mutex_destroy(&data->log_mutex);
-		return (0);
-	}
+		return (set_data_failure(data, 1));
 	if (!init_mutexes(data))
-	{
-		//when writing the function add a print statement
-		pthread_mutex_destroy(&data->log_mutex);
-		pthread_mutex_destroy(&data->alive_mutex);
-		return (0);
-	}
+		return (set_data_failure(data, 2));
 	return (1);
 }
 
