@@ -84,7 +84,6 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 			printf("pthread_create routine failure\n");
 			exit(EXIT_FAILURE);
 		}
-		//destroy all mutexes ??besides for the forks??
 		i++;
 	}
 	monitor(philosophers);
