@@ -54,9 +54,9 @@ void	philo_eat(t_philo *philo)
 	mutex_ptr = &philo->eat_count_mtx;
 	if (!pick_up_forks(philo))
 		return ;
-	pthread_mutex_lock(philo->last_meal_mtx);
+	pthread_mutex_lock(&philo->last_meal_mtx);
 	philo->last_eat = time_now();
-	pthread_mutex_unlock(philo->last_meal_mtx);
+	pthread_mutex_unlock(&philo->last_meal_mtx);
 	log_action(philo, "is eating");
 	optimized_sleep(philo->data->time_to_eat);
 	put_forks_down(philo);
