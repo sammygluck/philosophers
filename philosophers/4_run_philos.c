@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 12:20:24 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/17 11:40:30 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/18 08:49:58 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_join(t_philo ***philosophers, t_data *data)
 {
-	int	i;
-	t_philo **philos;
+	int		i;
+	t_philo	**philos;
 
 	philos = *philosophers;
 	i = 0;

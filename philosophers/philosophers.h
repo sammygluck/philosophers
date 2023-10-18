@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:49:39 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/17 12:01:38 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/18 08:49:37 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		lonely_philo(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		optimized_sleep(int to_sleep);
 void		monitor(t_philo ***philosophers);
-voidft_join(t_philo ***philosophers, t_data *data);
+void		ft_join(t_philo ***philosophers, t_data *data);
 void		free_stuff(t_data *data, t_philo **philosophers);
 void		destroy_mutexes(t_data *data);
 void		free_philos(t_data *data, t_philo **philosophers);
