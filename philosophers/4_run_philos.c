@@ -12,6 +12,20 @@
 
 #include "philosophers.h"
 
+void	ft_join(t_philo ***philosophers, t_data *data)
+{
+	int	i;
+	t_philo **philos;
+
+	philos = *philosophers;
+	i = 0;
+	while (i < data->philo_nr)
+	{
+		pthread_join(philos[i]->tid, NULL);
+		i++;
+	}
+}
+
 void	log_action(t_philo *philo, char *str)
 {
 	pthread_mutex_t	*mutex_ptr;
@@ -74,10 +88,5 @@ void	run_philos(t_philo ***philosophers, t_data *data)
 		i++;
 	}
 	monitor(philosophers);
-	i = 0;
-	while (i < data->philo_nr)
-	{
-		pthread_join(philos[i]->tid, NULL);
-		i++;
-	}
+	ft_join(philosophers, data);
 }

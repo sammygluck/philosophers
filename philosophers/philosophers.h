@@ -59,6 +59,7 @@ void		lonely_philo(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		optimized_sleep(int to_sleep);
 void		monitor(t_philo ***philosophers);
+voidft_join(t_philo ***philosophers, t_data *data);
 void		free_stuff(t_data *data, t_philo **philosophers);
 void		destroy_mutexes(t_data *data);
 void		free_philos(t_data *data, t_philo **philosophers);
