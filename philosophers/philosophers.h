@@ -74,5 +74,6 @@ int			check_philos_status(t_philo **philos);
 int			check_if_died(t_philo *philos);
 int			all_eaten(t_philo **philos);
 int			pick_up_forks(t_philo *philo);
+int			set_data_failure(t_data *data, int i)
 
 #endif
