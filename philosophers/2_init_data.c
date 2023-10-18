@@ -31,7 +31,6 @@ int	init_mutexes(t_data *data)
 	int	i;
 
 	data->fork_mutexes = malloc(sizeof(pthread_mutex_t) * data->philo_nr);
-	//error-note
 	if (!data->fork_mutexes)
 	{
 		printf("malloc failure mutex array\n");
@@ -40,7 +39,6 @@ int	init_mutexes(t_data *data)
 	i = 0;
 	while (i < data->philo_nr)
 	{
-		//error-note
 		if (pthread_mutex_init(&data->fork_mutexes[i], NULL))
 			return (init_mutexes_failure(data, i));
 		i++;
@@ -71,6 +69,7 @@ static int	set_data(t_data *data, int argc, char **argv)
 	}
 	if (!init_mutexes(data))
 	{
+		//when writing the function add a print statement
 		pthread_mutex_destroy(&data->log_mutex);
 		pthread_mutex_destroy(&data->alive_mutex);
 		return (0);
@@ -93,13 +92,11 @@ static int	validate_cmd(int argc, char **argv)
 
 int	init_data(t_data *data, int argc, char **argv)
 {
-	//error note + nothing malloced yet, just print message 
 	if (!validate_cmd(argc, argv))
 	{
 		printf("validate command args error\n");
 		return (0);
 	}
-	//error note here for pthread_mutex_init failure + print message
 	if (!set_data(data, argc, argv))
 		return (0);
 	return (1);

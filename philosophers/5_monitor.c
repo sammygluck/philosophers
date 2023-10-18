@@ -80,6 +80,5 @@ void	monitor(t_philo ***philosophers)
 		if (!check_philos_status(philos))
 			break ;
 	}
-	//printing and exiting correctly
 	return ;
 }

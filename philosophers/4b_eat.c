@@ -12,9 +12,7 @@
 
 #include "philosophers.h"
 
-//It might be functional, but I don't like it. 
-//In my opinion, lonely_philo should be handled seperately,
-//mainly because of the logging as there might be double logging
+// fix the double logging
 void	lonely_philo(t_philo *philo)
 {
 	long long	time_of_death;
@@ -45,7 +43,6 @@ int	pick_up_forks(t_philo *philo)
 
 void	put_forks_down(t_philo *philo)
 {
-	//error-notes
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
@@ -55,7 +52,6 @@ void	philo_eat(t_philo *philo)
 	pthread_mutex_t	*mutex_ptr;
 
 	mutex_ptr = &philo->eat_count_mtx;
-	//if there is only one philo => starve and die; location note
 	if (!pick_up_forks(philo))
 		return ;
 	//does this need a mutex?

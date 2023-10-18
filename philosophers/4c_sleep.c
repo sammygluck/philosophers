@@ -12,7 +12,6 @@
 
 #include "philosophers.h"
 
-// this function will return the current time in ms
 long long	time_now(void)
 {
 	t_timeval	now;
