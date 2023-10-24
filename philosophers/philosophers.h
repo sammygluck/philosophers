@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:49:39 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/18 08:49:37 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/18 09:07:52 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int			check_philos_status(t_philo **philos);
 int			check_if_died(t_philo *philos);
 int			all_eaten(t_philo **philos);
 int			pick_up_forks(t_philo *philo);
-int			set_data_failure(t_data *data, int i)
+int			set_data_failure(t_data *data, int i);
 
 #endif

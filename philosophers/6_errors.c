@@ -6,7 +6,7 @@
 /*   By: sgluck <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:44:08 by sgluck            #+#    #+#             */
-/*   Updated: 2023/10/17 11:46:02 by sgluck           ###   ########.fr       */
+/*   Updated: 2023/10/18 09:08:55 by sgluck           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	shut_down(t_data *data)
 	pthread_mutex_unlock(&data->alive_mutex);
 }
 
-int    set_data_failure(t_data *data, int i)
+int	set_data_failure(t_data *data, int i)
 {
-    if (i > 1)
-        pthread_mutex_desroy(&data->alive_mutex);
-    if (i > 0)
-        pthread_mutex_destroy(&data->log_mutex);
-    printf("failure in setting and creating data mutexes\n");
-    return (0);
+	if (i > 1)
+		pthread_mutex_destroy(&data->alive_mutex);
+	if (i > 0)
+		pthread_mutex_destroy(&data->log_mutex);
+	printf("failure in setting and creating data mutexes\n");
+	return (0);
 }
